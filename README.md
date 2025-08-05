@@ -105,4 +105,4 @@ Logout – Clears localStorage and redirects to login
 
 
 🤝 Credits
-Built with ❤️ by [Your Name] for Fortune Technologies Limited
+Built with ❤️ by CHRISTOPHER OBEGI for Fortune Technologies Limited
