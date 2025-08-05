@@ -72,8 +72,8 @@ npm run dev
 Frontend runs at: http://localhost:5173
 Backend runs at: http://localhost:5000
 
-🧭 Routes Overview
-🔐 Auth
+### 🧭 Routes Overview
+##🔐 Auth
 Method	Endpoint	Description
 POST	/api/auth/register	Register user
 POST	/api/auth/login	Login user
