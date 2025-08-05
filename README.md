@@ -65,10 +65,11 @@ JWT_SECRET=your_jwt_secret
 
 
 ###  🌐 Frontend Setup
-
+```bash
 cd employee-auth-frontend
-- npm install
-- npm run dev
+npm install
+npm run dev
+```
 - Frontend runs at: http://localhost:5173
 - Backend runs at: http://localhost:5000
 
