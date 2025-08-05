@@ -49,6 +49,7 @@ A full-stack role-based employee authentication system for **Fortune Technologie
 cd employee-auth-backend
 npm install
 node index.js
+```
 
 ## ⚙️ Environment Configuration
 
@@ -57,10 +58,10 @@ Make sure your `.env` file in the backend directory contains your database crede
 ```ini
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=tuk123
+DB_PASSWORD=your_mysql_database
 DB_NAME=auth_system
 JWT_SECRET=your_jwt_secret
-
+```
 
 
 ###  🌐 Frontend Setup
@@ -77,19 +78,19 @@ Method	Endpoint	Description
 POST	/api/auth/register	Register user
 POST	/api/auth/login	Login user
 
-👤 Profile
-Method	Endpoint	Description
-POST	/api/profile/setup	Setup employee profile
-GET	/api/profile/check	Check if profile exists
-GET	/api/profile/me	Get current user profile
+## 👤 Profile
+Method	   Endpoint	                Description
+POST	  /api/profile/setup	     Setup employee profile
+GET   	/api/profile/check	     Check if profile exists
+GET	    /api/profile/me	         Get current user profile
 
-🛠️ Admin
-Method	Endpoint	Description
-GET	/api/admin/users	View users (paginated)
-PUT	/api/admin/users/:id	Edit user (admin only)
-DELETE	/api/admin/users/:id	Delete user (admin only)
+## 🛠️ Admin
+Method	   Endpoint	                 Description
+GET	      /api/admin/users	         View users (paginated)
+PUT	      /api/admin/users/:id	     Edit user (admin only)
+DELETE	  /api/admin/users/:id	     Delete user (admin only)
 
-🎨 UI Flow
+## 🎨 UI Flow
 Login Page – / or /login
 
 Register Page – /register
@@ -104,5 +105,5 @@ Logout – Clears localStorage and redirects to login
 
 
 
-🤝 Credits
+## 🤝 Credits
 Built with ❤️ by CHRISTOPHER OBEGI for Fortune Technologies Limited
