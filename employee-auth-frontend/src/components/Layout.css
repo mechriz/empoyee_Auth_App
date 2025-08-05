@@ -1,0 +1,34 @@
+.layout {
+  background: linear-gradient(to bottom right, #ffa500, #007bff); /* orange to blue */
+  min-height: 100vh;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.content {
+  padding: 20px;
+}
+
+button {
+  background-color: white;
+  color: #007bff;
+  padding: 8px 14px;
+  border: none;
+  margin: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #007bff;
+  color: white;
+}
