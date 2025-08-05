@@ -67,41 +67,41 @@ JWT_SECRET=your_jwt_secret
 ###  🌐 Frontend Setup
 
 cd employee-auth-frontend
-npm install
-npm run dev
-Frontend runs at: http://localhost:5173
-Backend runs at: http://localhost:5000
+- npm install
+- npm run dev
+- Frontend runs at: http://localhost:5173
+- Backend runs at: http://localhost:5000
 
 ### 🧭 Routes Overview
-##🔐 Auth
-Method	Endpoint	Description
-POST	/api/auth/register	Register user
-POST	/api/auth/login	Login user
+## 🔐 Auth
+- |Method	Endpoint	Description
+- POST	/api/auth/register	Register user
+- POST	/api/auth/login	Login user
 
 ## 👤 Profile
-Method	   Endpoint	                Description
-POST	  /api/profile/setup	     Setup employee profile
-GET   	/api/profile/check	     Check if profile exists
-GET	    /api/profile/me	         Get current user profile
+- Method	- Endpoint	            - Description
+- POST	  - /api/profile/setup	  - Setup employee profile      
+- GET     -	/api/profile/check	  - Check if profile exists    
+- GET	    -   /api/profile/me	    - Get current user profile 
 
 ## 🛠️ Admin
-Method	   Endpoint	                 Description
-GET	      /api/admin/users	         View users (paginated)
-PUT	      /api/admin/users/:id	     Edit user (admin only)
-DELETE	  /api/admin/users/:id	     Delete user (admin only)
+- Method	  -   Endpoint	            - Description
+- GET	      - /api/admin/users	      - View users (paginated)
+- PUT	      - /api/admin/users/:id	  - Edit user (admin only)
+- DELETE	  - /api/admin/users/:id	  - Delete user (admin only)
 
 ## 🎨 UI Flow
-Login Page – / or /login
+- Login Page – / or /login
 
-Register Page – /register
+- Register Page – /register
 
-Profile Setup – /profile-setup
+- Profile Setup – /profile-setup
 
-User Dashboard – /dashboard/user
+- User Dashboard – /dashboard/user
 
-Admin Dashboard – /dashboard/admin
+- Admin Dashboard – /dashboard/admin
 
-Logout – Clears localStorage and redirects to login
+- Logout – Clears localStorage and redirects to login
 
 
 
