@@ -23,9 +23,10 @@ function Navbar() {
       {user.role === 'user' && (
         <button onClick={() => navigate('/dashboard/user')}>User Dashboard</button>
       )}
-      {user.role === 'admin' && (
-        <button onClick={() => navigate('/dashboard/admin')}>Admin Dashboard</button>
+      {['admin', 'superadmin'].includes(user.role) && (
+  <button onClick={() => navigate('/dashboard/admin')}>Admin Dashboard</button>
       )}
+
       <button style={{ marginLeft: '15px' }} onClick={handleLogout}>Logout</button>
     </nav>
   );

@@ -5,10 +5,20 @@ exports.setupProfile = async (req, res) => {
     const userId = req.user.id;
     const { department, designation, date_joined, full_name } = req.body;
 
-    const [existing] = await db.query('SELECT COUNT(*) AS count FROM employee_profiles');
-    const count = existing[0].count + 1;
-    const employee_id = `EMP-${1000 + count}`;
+    // ✅ Check if profile already exists
+    const [existing] = await db.query(
+      'SELECT * FROM employee_profiles WHERE user_id = ?',
+      [userId]
+    );
 
+    if (existing.length > 0) {
+      return res.status(400).json({ message: 'Profile already exists for this user' });
+    }
+
+    // ✅ Generate employee ID using user ID
+    const employee_id = `EMP-${String(userId).padStart(4, '0')}`;
+
+    // ✅ Insert new profile
     await db.query(
       'INSERT INTO employee_profiles (user_id, employee_id, department, designation, date_joined, full_name) VALUES (?, ?, ?, ?, ?, ?)',
       [userId, employee_id, department, designation, date_joined, full_name]
@@ -21,7 +31,7 @@ exports.setupProfile = async (req, res) => {
   }
 };
 
-// ✅ Add this new route handler below setupProfile
+// ✅ Check if profile exists for current user
 exports.checkProfileExists = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -36,6 +46,7 @@ exports.checkProfileExists = async (req, res) => {
   }
 };
 
+// ✅ Get current user's profile
 exports.getMyProfile = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -59,6 +70,7 @@ exports.getMyProfile = async (req, res) => {
     res.status(500).json({ message: 'Server error while fetching profile' });
   }
 };
+
 
 
 

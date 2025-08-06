@@ -35,7 +35,7 @@ function LoginForm() {
 
       if (!profileData.profileExists) {
         navigate('/profile-setup');
-      } else if (data.user.role === 'admin') {
+      } else if (['admin', 'superadmin'].includes(data.user.role)) {
         navigate('/dashboard/admin');
       } else {
         navigate('/dashboard/user');

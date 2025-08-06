@@ -6,8 +6,8 @@ const db = require('../db');
 const authMiddleware = require('../middleware/authMiddleware');
 const roleMiddleware = require('../middleware/roleMiddleware');
 
-// ✅ Get paginated list of users (admin only)
-router.get('/users', authMiddleware, roleMiddleware('admin'), async (req, res) => {
+// ✅ Get users (admin + superadmin)
+router.get('/users', authMiddleware, roleMiddleware(['admin', 'superadmin']), async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
   const offset = (page - 1) * limit;
@@ -31,16 +31,30 @@ router.get('/users', authMiddleware, roleMiddleware('admin'), async (req, res) =
   }
 });
 
-// ✅ Update a user (admin only) - Partial update
-router.put('/users/:id', authMiddleware, roleMiddleware('admin'), async (req, res) => {
+// ✅ Update a user (admin + superadmin)
+router.put('/users/:id', authMiddleware, roleMiddleware(['admin', 'superadmin']), async (req, res) => {
   const userId = req.params.id;
   const { username, email, role } = req.body;
 
-  if (!username && !email && !role) {
-    return res.status(400).json({ message: 'No fields to update' });
-  }
-
   try {
+    const [targetUser] = await db.query('SELECT role FROM users WHERE id = ?', [userId]);
+
+    if (!targetUser.length) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const targetRole = targetUser[0].role;
+
+    // 🚫 Admins cannot update other admins or superadmins
+    if (req.user.role !== 'superadmin' && (targetRole === 'admin' || targetRole === 'superadmin')) {
+      return res.status(403).json({ message: 'Only superadmin can update admin/superadmin users' });
+    }
+
+    // 🚫 Only superadmin can assign "admin" or "superadmin" roles
+    if (role && (role === 'admin' || role === 'superadmin') && req.user.role !== 'superadmin') {
+      return res.status(403).json({ message: 'Only superadmin can assign admin/superadmin roles' });
+    }
+
     const fields = [];
     const values = [];
 
@@ -57,16 +71,16 @@ router.put('/users/:id', authMiddleware, roleMiddleware('admin'), async (req, re
       values.push(role);
     }
 
+    if (!fields.length) {
+      return res.status(400).json({ message: 'No fields to update' });
+    }
+
     values.push(userId);
 
     const [result] = await db.query(
       `UPDATE users SET ${fields.join(', ')} WHERE id = ?`,
       values
     );
-
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ message: 'User not found or no changes made' });
-    }
 
     res.json({ message: 'User updated successfully' });
   } catch (err) {
@@ -75,15 +89,33 @@ router.put('/users/:id', authMiddleware, roleMiddleware('admin'), async (req, re
   }
 });
 
-// ✅ Delete a user (admin only)
-router.delete('/users/:id', authMiddleware, roleMiddleware('admin'), async (req, res) => {
+// ✅ Delete a user (admin + superadmin)
+router.delete('/users/:id', authMiddleware, roleMiddleware(['admin', 'superadmin']), async (req, res) => {
   const userId = req.params.id;
 
   try {
+    const [targetUser] = await db.query('SELECT role FROM users WHERE id = ?', [userId]);
+
+    if (!targetUser.length) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const targetRole = targetUser[0].role;
+
+    // 🚫 Only superadmin can delete admins
+    if (targetRole === 'admin' && req.user.role !== 'superadmin') {
+      return res.status(403).json({ message: 'Only superadmin can delete admins' });
+    }
+
+    // 🚫 No one can delete superadmins
+    if (targetRole === 'superadmin') {
+      return res.status(403).json({ message: 'Superadmins cannot be deleted' });
+    }
+
     const [result] = await db.query('DELETE FROM users WHERE id = ?', [userId]);
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not deleted' });
     }
 
     res.json({ message: 'User deleted successfully' });

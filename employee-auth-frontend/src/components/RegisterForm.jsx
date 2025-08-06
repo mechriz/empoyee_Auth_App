@@ -51,8 +51,7 @@ function RegisterForm() {
           <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
 
           <select name="role" onChange={handleChange}>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
+           <option value="user">User</option>
           </select>
 
           <button type="submit">Register</button>

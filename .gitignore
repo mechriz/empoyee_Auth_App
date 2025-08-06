@@ -1,0 +1,14 @@
+# Ignore node modules
+node_modules/
+.env
+
+# VS Code settings
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# Build output
+dist/
+build/
