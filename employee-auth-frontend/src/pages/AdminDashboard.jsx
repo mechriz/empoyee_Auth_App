@@ -160,28 +160,29 @@ function AdminDashboard() {
     marginBottom: '10px',
   }}
 >
-  <div style={{ display: 'flex', alignItems: 'center' }}>
+  <div style={{ display: 'flex', alignItems: 'stretch' }}>
     <input
       type="text"
       placeholder="Search by username or email ..."
       value={search}
       onChange={(e) => setSearch(e.target.value)}
       style={{
-        padding: '6px 10px',
+        height: '45px', /* Set a fixed height */
+        padding: '0 12px', /* Adjust padding to work with the new height */
         width: '250px',
         border: '1px solid #ccc',
         borderRight: 'none',
         borderTopLeftRadius: '4px',
         borderBottomLeftRadius: '4px',
-        lineHeight: '1.5',
-        verticalAlign: 'middle'
-
+        lineHeight: 'normal',
+        boxSizing: 'border-box', /* Important for consistent sizing */
       }}
     />
     <button
       type="submit"
       style={{
-        padding: '10px 12px',
+        height: '40px', /* Set a fixed height */
+        padding: '0 15px', /* Adjust padding to work with the new height */
         fontSize: '14px',
         border: '1px solid #ccc',
         borderLeft: 'none',
@@ -190,8 +191,8 @@ function AdminDashboard() {
         backgroundColor: '#007bff',
         color: 'white',
         cursor: 'pointer',
-        lineHeight: '1.5',
-        verticalAlign: 'middle'
+        lineHeight: 'normal',
+        boxSizing: 'border-box', /* Important for consistent sizing */
       }}
     >
       Search
