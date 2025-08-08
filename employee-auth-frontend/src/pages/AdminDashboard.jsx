@@ -167,7 +167,7 @@ function AdminDashboard() {
       value={search}
       onChange={(e) => setSearch(e.target.value)}
       style={{
-        height: '45px', /* Set a fixed height */
+        height: '44px', /* Set a fixed height */
         padding: '0 12px', /* Adjust padding to work with the new height */
         width: '250px',
         border: '1px solid #ccc',
@@ -181,8 +181,8 @@ function AdminDashboard() {
     <button
       type="submit"
       style={{
-        height: '40px', /* Set a fixed height */
-        padding: '0 15px', /* Adjust padding to work with the new height */
+        height: '41px', /* Set a fixed height */
+        padding: '0 18px', /* Adjust padding to work with the new height */
         fontSize: '14px',
         border: '1px solid #ccc',
         borderLeft: 'none',
